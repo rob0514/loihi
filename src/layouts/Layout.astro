@@ -1,6 +1,13 @@
 ---
-import { Image, Picture } from '@astrojs/image/components';
+import "@fontsource/cormorant-infant"
+import "@fontsource/poppins"
+import "../assets/fonts/grande.ttf"
+import { ScrollObserver } from 'astro-scroll-observer';
+import Header from '../components/Header.astro'
+import Popup from '../components/Popup.astro'
+import Footer from '../components/Footer.astro'
 import '../styles/base.css'
+// ...
 
 
 
@@ -12,29 +19,22 @@ const { title } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="loihi">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
+		<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.typekit.net/hcj0uwp.css">
 		<title>{title}</title>
+		<ScrollObserver />
 	</head>
-	<body>
+	<body class="overflow-x-hidden">
+		<Header />
 		<slot />
+	    <Popup />
+	    <Footer />
+		<script is:inline src="../src/index.js"></script>
 	</body>
 </html>
-<style is:global>
-	:root {
-		--accent: 124, 58, 237;
-		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background-color: #F6F6F6;
-	}
-	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
-	}
-</style>

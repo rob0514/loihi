@@ -1,0 +1,29 @@
+---
+import { Cloudinary } from '@cloudinary/url-gen';
+
+
+const cld = new Cloudinary({
+  cloud: {
+    cloudName: 'dino1l5po'
+  }
+});
+
+const { src, ...props } = Astro.props;
+let cldSrc = cld.video(src).format('auto').delivery('q_auto');
+
+if ( src.startsWith('https://')) {
+  cldSrc.setDeliveryType('fetch');
+}
+
+interface Props {
+  src: string;
+  width: string;
+  height: string;
+  alt: string;
+}
+---
+
+<video class="brightness-[70%] saturate-[50%]" playsinline autoplay muted loop poster="cake.jpg">
+    <source src={cldSrc.toURL()} type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
